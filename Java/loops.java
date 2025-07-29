@@ -4,7 +4,9 @@ public class loops {
     public static void main(String args[]){
     //    multi23();
         // countint();
-        System.out.println(unqiuenum());
+        // System.out.println(unqiuenum());
+        // sumsquare();
+        squarepattern();
     }
     static void multi23(){
         System.out.print("Enter range: ");
@@ -33,7 +35,7 @@ public class loops {
         System.out.println("The count of digits are: "+count);
     }
     static boolean unqiuenum(){
-        System.out.print("Enter digits: ");
+        System.out.print("Enter digits to check a unique number: ");
         int n=sc.nextInt();
         int c=n;
         while(n>0){
@@ -45,7 +47,6 @@ public class loops {
                 if(r==r1){
                     count++;
                     if(count>1){
-                        // System.out.println("false");
                         return false;
                     }
                 }
@@ -53,7 +54,34 @@ public class loops {
             }
             n=n/10;
         }
-        // System.out.println("true");
         return true;
+    }
+
+    static void sumsquare(){
+        System.out.print("Enter the range of numbers: ");
+        int n=sc.nextInt();
+        for(int i=0;i<=n;i++){
+            for(int j=1;j<=i;j++){
+                System.out.print(i+" ");
+            }
+            System.out.println(i*i+" ");
+        }
+    }
+    static void squarepattern(){
+        System.out.print("Enter the square size: ");
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                if(i==1 || i==n||j==1||j==n){
+                    System.out.print("* ");
+                }
+                else{
+                    System.out.print("  ");
+                }
+                
+               
+            }
+            System.out.println(" ");
+        }
     }
 }
