@@ -6,7 +6,8 @@ public class loops {
         // countint();
         // System.out.println(unqiuenum());
         // sumsquare();
-        squarepattern();
+        // squarepattern();
+        diagonal_pattern();
     }
     static void multi23(){
         System.out.print("Enter range: ");
@@ -78,8 +79,21 @@ public class loops {
                 else{
                     System.out.print("  ");
                 }
-                
-               
+            }
+            System.out.println(" ");
+        }
+    }
+    static void diagonal_pattern(){
+         System.out.print("Enter the square size: ");
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                if(i==1 || i==n||j==1||j==n||i==j||i==n-j+1){
+                    System.out.print("* ");
+                }
+                else{
+                    System.out.print("  ");
+                }
             }
             System.out.println(" ");
         }
