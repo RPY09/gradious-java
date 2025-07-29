@@ -1,0 +1,14 @@
+import java.util.Scanner;
+public class loops {
+    static Scanner sc=new Scanner(System.in);
+    public static void main(String args[]){
+       multi23();
+    }
+    static void multi23(){
+        System.out.print("Enter range: ");
+        int n=sc.nextInt();
+        for(int i=2,j=3;i<=n;i+=2,j+=3){
+            System.out.print(" "+i+"  "+ j);
+        }
+    }
+}
