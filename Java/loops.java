@@ -7,7 +7,8 @@ public class loops {
         // System.out.println(unqiuenum());
         // sumsquare();
         // squarepattern();
-        diagonal_pattern();
+        // diagonal_pattern();
+        num_tri_pattern();
     }
     static void multi23(){
         System.out.print("Enter range: ");
@@ -96,6 +97,22 @@ public class loops {
                 }
             }
             System.out.println(" ");
+        }
+    }
+    static void num_tri_pattern(){
+        System.out.print("Enter the Pascal size: ");
+        int n = sc.nextInt();
+        for(int i = 1; i <= n; i++){
+            // Print spaces
+            for(int j = 1; j <= n - i; j++){
+                System.out.print(" ");
+            }
+            // Print numbers increasing
+            for(int k = 1; k <= i; k++){
+                System.out.print(k + " ");
+            }
+           
+            System.out.println();
         }
     }
 }
