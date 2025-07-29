@@ -7,8 +7,11 @@ public class loops {
     static void multi23(){
         System.out.print("Enter range: ");
         int n=sc.nextInt();
-        for(int i=2,j=3;i<=n;i+=2,j+=3){
-            System.out.print(" "+i+"  "+ j);
+        int i=2,j=3,count=0;
+        for(;i<=n&&count<=n;i+=2,j+=3){
+            // System.out.print(" "+i+"  "+ j);
+            count++;
         }
+        System.out.println(j);
     }
 }
