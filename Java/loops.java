@@ -8,7 +8,8 @@ public class loops {
         // sumsquare();
         // squarepattern();
         // diagonal_pattern();
-        num_tri_pattern();
+        // num_tri_pattern();
+        num_trirev_pattern();
     }
     static void multi23(){
         System.out.print("Enter range: ");
@@ -99,8 +100,9 @@ public class loops {
             System.out.println(" ");
         }
     }
+
     static void num_tri_pattern(){
-        System.out.print("Enter the Pascal size: ");
+          System.out.print("Enter the Pascal size: ");
         int n = sc.nextInt();
         for(int i = 1; i <= n; i++){
             // Print spaces
@@ -109,11 +111,39 @@ public class loops {
             }
             // Print numbers increasing
             for(int k = 1; k <= i; k++){
-                System.out.print(k + " ");
+                System.out.print(i-k + " ");
             }
-            // Print numbers decreasing (optional for symmetry)
+            
             for(int k = i - 1; k >= 1; k--){
-                System.out.print(k + " ");
+                System.out.print(i-k + " ");
+            }
+            System.out.println();
+        }
+    }
+    static void num_trirev_pattern(){
+        System.out.print("Enter the Pascal size: ");
+        int n = sc.nextInt();
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n - i; j++){
+                System.out.print("  ");
+            }
+            for(int k = 1; k <= i; k++){
+                System.out.print(i-k+1 + " ");
+            }
+            for(int k = i - 1; k >= 1; k--){
+                System.out.print(i-k+1 + " ");
+            }
+            System.out.println();
+        }
+        for(int i = n; i >= 1; i--){
+            for(int j = n-i; j >= 1; j--){
+                System.out.print("  ");
+            }
+             for(int k = 1; k <= i; k++){
+                System.out.print(i-k+1 + " ");
+            }
+             for(int k = i - 1; k >= 1; k--){
+                System.out.print(i-k+1 + " ");
             }
             System.out.println();
         }
