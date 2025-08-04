@@ -13,7 +13,7 @@ public class condition {
         // electric(sc);
         // battery(sc);
         // season(sc);
-        employee(sc);
+        // employee(sc);
         // monkey(sc);
         // small(sc);
         // large(sc);
@@ -199,21 +199,25 @@ public class condition {
         }
     }
 
-    // static void season(Scanner sc){
-    //     System.out.println("Enter month number:");
-    //     int month=sc.nextInt();
-    //       switch (month){
-    //         case 1: case 2: case 12:
-    //             System.out.println( "winter season");
-    //         case 3: case 4: case 5:
-    //             System.out.println(); "summer season";
-    //         case 6: case 7: case 8: case 9:
-    //             return "monsoon season";
-    //         case 10: case 11:
-    //             return "autumn season";
-    //     }
+    static void season(Scanner sc){
+        System.out.println("Enter month number:");
+        int month=sc.nextInt();
+          switch (month){
+            case 1: case 2: case 12:
+                System.out.println( "winter season");
+                break;
+            case 3: case 4: case 5:
+                System.out.println( "summer season");
+                break;
+            case 6: case 7: case 8: case 9:
+                System.out.println( "monsoon season");
+                break;
+            case 10: case 11:
+                System.out.println( "autumn season");
+                break;
+        }
 
-    // }
+    }
 
     static void employee(Scanner sc){
         System.out.println("Is this a Weekday(True || False ):");

@@ -9,7 +9,7 @@ public class loops {
         // squarepattern();
         // diagonal_pattern();
         // num_tri_pattern();
-        num_trirev_pattern();
+        // num_trirev_pattern();
     }
     static void multi23(){
         System.out.print("Enter range: ");
