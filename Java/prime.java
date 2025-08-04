@@ -43,8 +43,11 @@ static void sumeven(){
         }
         int sum=0;
         for(int i:a){
-            sum+=i;
+            if(i%2==0){
+                sum+=i;
+            }
         }
  System.out.print(sum);
+ 
 }
 }
