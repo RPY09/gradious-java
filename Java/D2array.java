@@ -36,15 +36,15 @@ public class D2array {
         int [][] a=new int[n][m];
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-             System.out.print("Enter row["+i+"] of ["+j+"] column element: ");
+             System.out.print("Enter row["+i+"] of column ["+j+"]  element: ");
               a[i][j]=sc.nextInt();
             }
         }
         for(int i=0;i<n;i++){
             int sum=0;
             for(int j=0; j<m; j++){
-                sum+=a[i][j];
-                // sum+=a[j][i];for column sum
+                // sum+=a[i][j];
+                sum+=a[j][i];//for column sum
             }
             System.out.println("Sum of row["+i+"] is "+sum);
         }
