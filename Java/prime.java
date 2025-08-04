@@ -87,29 +87,43 @@ static void minarr(){
 }
 
 static void pairsarr(){
-     System.out.print("enter the array size");
+     System.out.print("enter the array size ");
         int n =sc.nextInt();
         System.out.println("enter the array element");
         int [] a=new int[n];
         for(int i=0;i<n;i++){
             a[i]=sc.nextInt();
         }
-    int max=0;
-    int p1=0,p2=0;
-        for(int i=0;i<n;i++){
-            int sum=0;
-            for(int j=i+1;j<n;j++){
-                sum=a[i]+a[j];
-                if(sum>max){
-                    max=sum;
-                     p1=a[i];
-                     p2=a[j];
-                }
-                System.out.print(sum+"  ");
-            }
+    // int max=0;
+    // int p1=0,p2=0;
+        // for(int i=0;i<n;i++){
+        //     int sum=0;
+        //     for(int j=i+1;j<n;j++){
+        //         sum=a[i]+a[j];
+        //         if(sum>max){
+        //             max=sum;
+        //              p1=a[i];
+        //              p2=a[j];
+        //         }
+        //         System.out.print(sum+"  ");
+        //     }
 
+        // }
+        // System.out.println("\nmax element pair ["+p1+","+p2+"] = "+max);
+
+        //optimize code
+    int max=a[0],smax=0;
+    for(int i=0;i<n;i++){
+        if(a[i]>max){
+            smax=max;
+            max=a[i];
         }
-        System.out.println("\nmax element pair "+p1+","+p2+"="+max);
+        else if(a[i]>smax){
+            smax=a[i];
+        }
+    }
+    int sum=max+smax;
+    System.out.println(max+","+smax+"="+sum);
 }
 
 }
