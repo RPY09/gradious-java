@@ -5,7 +5,9 @@ public class prime {
     public static void main(String args[]) {
         // primes();
         // sumeven();
-        maxarr();
+        // maxarr();
+        // minarr();
+        pairsarr();
         
     }
     
@@ -48,12 +50,11 @@ static void sumeven(){
                 sum+=i;
             }
         }
- System.out.print(sum);
+ System.out.print("Sum of even number in array"+sum);
  
 }
 static void maxarr(){
     System.out.print("enter the array size");
-
         int n =sc.nextInt();
         System.out.print("enter the array element");
         int [] a=new int[n];
@@ -66,7 +67,49 @@ static void maxarr(){
             max=a[i];
             }
         }
- System.out.print(max);
+ System.out.print("Maximum nunber in array "+max);
+}
+static void minarr(){
+    System.out.print("enter the array size");
+        int n =sc.nextInt();
+        System.out.print("enter the array element");
+        int [] a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        int min=a[0];
+        for(int i:a){
+            if(i<min){
+            min=a[i];
+            }
+        }
+ System.out.print("Minimum nunber in array "+min);
+}
+
+static void pairsarr(){
+     System.out.print("enter the array size");
+        int n =sc.nextInt();
+        System.out.println("enter the array element");
+        int [] a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+    int max=0;
+    int p1=0,p2=0;
+        for(int i=0;i<n;i++){
+            int sum=0;
+            for(int j=i+1;j<n;j++){
+                sum=a[i]+a[j];
+                if(sum>max){
+                    max=sum;
+                     p1=a[i];
+                     p2=a[j];
+                }
+                System.out.print(sum+"  ");
+            }
+
+        }
+        System.out.println("\nmax element pair "+p1+","+p2+"="+max);
 }
 
 }
