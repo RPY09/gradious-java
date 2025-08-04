@@ -1,9 +1,16 @@
 import java.util.Scanner;
 public class prime {
+    static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a number: ");
+    public static void main(String args[]) {
+        // primes();
+        sumeven();
+        
+    }
+    
+
+static void primes(){
+    System.out.print("Enter a number: ");
         int num = sc.nextInt();
         boolean isPrime = true;
         int count=0;
@@ -24,12 +31,20 @@ public class prime {
             }
         }
         System.out.println(count);
-        int a=7,b=0,c;
-    --a;
-    a--;
-    ++b;
-    c=a^b;
-    System.out.print(c);
-    }
-    
+}
+static void sumeven(){
+     System.out.print("enter the array size");
+
+        int n =sc.nextInt();
+        System.out.print("enter the array element");
+        int [] a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        int sum=0;
+        for(int i:a){
+            sum+=i;
+        }
+ System.out.print(sum);
+}
 }
