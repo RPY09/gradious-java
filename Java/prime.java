@@ -4,7 +4,8 @@ public class prime {
 
     public static void main(String args[]) {
         // primes();
-        sumeven();
+        // sumeven();
+        maxarr();
         
     }
     
@@ -43,11 +44,29 @@ static void sumeven(){
         }
         int sum=0;
         for(int i:a){
-            if(i%2==0){
+            if(a[i]%2==0){
                 sum+=i;
             }
         }
  System.out.print(sum);
  
 }
+static void maxarr(){
+    System.out.print("enter the array size");
+
+        int n =sc.nextInt();
+        System.out.print("enter the array element");
+        int [] a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        int max=a[0];
+        for(int i:a){
+            if(i>max){
+            max=a[i];
+            }
+        }
+ System.out.print(max);
+}
+
 }
