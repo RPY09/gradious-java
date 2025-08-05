@@ -8,7 +8,7 @@ public class loops {
         // sumsquare();
         // squarepattern();
         // diagonal_pattern();
-        // num_tri_pattern();
+        num_tri_pattern();
         // num_trirev_pattern();
     }
     static void multi23(){

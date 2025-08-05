@@ -5,7 +5,8 @@ public class D2array {
     public static void main(String[] args) {
         // matarray();
         // summat();
-        abovenumsum();
+        // abovenumsum();
+        
     }
 //=========================================================================2D ARRAYS=================================================================================
     static void matarray(){
@@ -67,6 +68,7 @@ static void abovenumsum(){
              System.out.print("Enter row["+i+"] of column ["+j+"]  element: ");
               a[i][j]=sc.nextInt();
             }
+            System.out.println(" ");
         }
 
         for(int i=1;i<n;i++){

@@ -7,7 +7,8 @@ public class prime {
         // sumeven();
         // maxarr();
         // minarr();
-        pairsarr();
+        // pairsarr();
+        uniquenum();
         
     }
     
@@ -125,5 +126,19 @@ static void pairsarr(){
     int sum=max+smax;
     System.out.println(max+","+smax+"="+sum);
 }
-
+//=====================================================================================UNIQUE NUMBER ARRAY=========================================================
+static void uniquenum(){
+     System.out.print("enter the array size ");
+        int n =sc.nextInt();
+        System.out.println("enter the array element");
+        int [] a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        int unq=0;
+        for(int i=0;i<n;i++){
+            unq^=a[i];
+        }
+        System.out.println(unq);
+}
 }
