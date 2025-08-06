@@ -214,20 +214,22 @@ public class OneFile {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+        System.out.print("Enter the range to get next elements: ");
+        int range=sc.nextInt();
         // Calculate common difference for arithmetic progression
         int series = arr[1] - arr[0];
-        int[] result = new int[n]; // This should be size 5 for next 5 terms
+        int[] result = new int[range]; // This should be size range for next range terms
         int last = arr[n - 1]; // Start from the last element of input array
         // Generate next 5 terms
-        for(int i = 0; i < n; i++) { // Should be i < 5 for next 5 terms
+        for(int i = 0; i < range; i++) { // Should be i < range for next range terms
             last += series;
             result[i] += last;
         }
         // Print the next 5 terms in array format
-        System.out.print("next 5 series: [");
-        for (int i = 0; i < n; i++) { // Should be i < 5 for next 5 terms
+        System.out.print("next "+range+" series: [");
+        for (int i = 0; i < range; i++) { // Should be i < 5 for next 5 terms
             System.out.print(result[i]);
-            if (i < n - 1) System.out.print(", ");
+            if (i < range - 1) System.out.print(", ");
         }
         System.out.println("]");
     }
