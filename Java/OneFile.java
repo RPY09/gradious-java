@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class OneFile {
     static Scanner sc = new Scanner(System.in);
@@ -14,8 +13,8 @@ public class OneFile {
         // int [] result = rotateArray(arr);
         // int [] result = ThirdLargestElement(arr);
         // int [] result = maxDifference(arr);
-        duplicatesarr();
-
+        // duplicatesarr();
+        next5series();
         System.out.println(Arrays.toString(result));
     }
 
@@ -199,5 +198,37 @@ public class OneFile {
             }
             System.out.println("]");
         }
+    }
+    /**
+     * Prints the next 5 terms of an arithmetic series based on user input.
+     * The common difference is calculated from the first two elements.
+     * The next terms are generated starting from the last element of the input array.
+     * Example: If input is [2, 4, 6], output will be [8, 10, 12, 14, 16].
+     */
+    static void next5series(){
+        System.out.print("Enter size of the array: ");
+        int n = sc.nextInt();
+        System.out.println("enter the array element");
+        int[] arr = new int[n];
+        // Read array elements from user
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        // Calculate common difference for arithmetic progression
+        int series = arr[1] - arr[0];
+        int[] result = new int[n]; // This should be size 5 for next 5 terms
+        int last = arr[n - 1]; // Start from the last element of input array
+        // Generate next 5 terms
+        for(int i = 0; i < n; i++) { // Should be i < 5 for next 5 terms
+            last += series;
+            result[i] += last;
+        }
+        // Print the next 5 terms in array format
+        System.out.print("next 5 series: [");
+        for (int i = 0; i < n; i++) { // Should be i < 5 for next 5 terms
+            System.out.print(result[i]);
+            if (i < n - 1) System.out.print(", ");
+        }
+        System.out.println("]");
     }
 }
