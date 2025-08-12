@@ -2,8 +2,8 @@ import java.util.Scanner;
 public class rem {
     static Scanner sc=new Scanner(System.in);
     public static void main(String[] args) {
-        // even_dash();
-        System.out.println(duck());
+        even_dash();
+        // System.out.println(duck());
     }
        
     static void even_dash(){

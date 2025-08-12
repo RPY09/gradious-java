@@ -6,7 +6,7 @@ public class D2array {
         // matarray();
         // summat();
         // abovenumsum();
-        
+        arr90deg();
     }
 //=========================================================================2D ARRAYS=================================================================================
     static void matarray(){
@@ -79,6 +79,34 @@ static void abovenumsum(){
          for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                System.out.print(a[i][j]+"  ");
+            }
+            System.out.println(" ");
+        }
+    }
+    static void arr90deg(){
+        System.out.print("enter the array row size: ");
+        int n =sc.nextInt();
+         System.out.print("enter the array column size: ");
+        int m =sc.nextInt();
+        System.out.println("enter the array elements: ");
+        int [][] a=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+             System.out.print("Enter row["+i+"] of column ["+j+"]  element: ");
+              a[i][j]=sc.nextInt();
+            }
+            System.out.println(" ");
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+               System.out.print(a[i][j]+"  ");
+            }
+            System.out.println(" ");
+        }
+        System.out.println("ARRAY AFTER 90  DEG ROTATION");
+        for(int j=0;j<m;j++){
+            for(int i=0;i<n;i++){
+               System.out.print(a[j][i]+"  ");
             }
             System.out.println(" ");
         }

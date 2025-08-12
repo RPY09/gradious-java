@@ -11,7 +11,13 @@ public class prime {
         // uniquenum();
         // bubbleSortStrings();
     //    productarr();
-    addOne();
+    // addOne();
+    int arr[][]={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+    // int[] result=arr2rev(arr);
+    for(int j=0;j<result.length;j++){
+    System.out.print(result[j]+" ");
+            }
+           
         
     }
     
@@ -224,4 +230,25 @@ static void pairsarr(){
     }
     System.out.println("]");
 }
+static int[] arr2rev(int arr[][]) {
+    int rows = arr.length;
+    int cols = arr[0].length;
+    int[] brr = new int[rows * cols];
+    int idx = 0;
+    for (int i = 0; i < rows; i++) {
+        if (i % 2 == 0) {
+            // Even row: right to left
+            for (int j = cols - 1; j >= 0; j--) {
+                brr[idx++] = arr[i][j];
+            }
+        } else {
+            // Odd row: left to right
+            for (int j = 0; j < cols; j++) {
+                brr[idx++] = arr[i][j];
+            }
+        }
+    }
+    return brr;
+}
+
 }
