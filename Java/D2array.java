@@ -6,7 +6,9 @@ public class D2array {
         // matarray();
         // summat();
         // abovenumsum();
-        arr90deg();
+        // arr90deg();
+        // magicmatrix();
+        matclock();
     }
 //=========================================================================2D ARRAYS=================================================================================
     static void matarray(){
@@ -104,11 +106,85 @@ static void abovenumsum(){
             System.out.println(" ");
         }
         System.out.println("ARRAY AFTER 90  DEG ROTATION");
-        for(int j=0;j<m;j++){
+        for(int j=m-1;j>=0;j--){
             for(int i=0;i<n;i++){
-               System.out.print(a[j][i]+"  ");
+               System.out.print(a[i][j]+"  ");
             }
             System.out.println(" ");
         }
+    }
+// ======================================================================
+    static void magicmatrix(){
+       int arr[][] = {{2,7,6},{9,5,1},{4,3,8}};
+int n = arr.length;
+int sum1 = 0; // sum of first row
+boolean magic = true;
+
+// Calculate sum of first row
+for (int j = 0; j < n; j++) {
+    sum1 += arr[0][j];
+}
+
+int sum3 = 0; // main diagonal
+int sum4 = 0; // secondary diagonal
+
+for (int i = 0; i < n; i++) {
+    int sum = 0;  // row sum
+    int sum2 = 0; // column sum
+
+    for (int j = 0; j < n; j++) {
+        sum += arr[i][j];
+        sum2 += arr[j][i];
+    }
+
+    // if row OR column doesn't match expected sum, not magic
+    if (sum != sum1 || sum2 != sum1) {
+        magic = false;
+        break;
+    }
+
+    sum3 += arr[i][i];           // main diagonal sum
+    sum4 += arr[i][n - 1 - i];   // secondary diagonal sum
+}
+
+// Final check
+if (magic && sum3 == sum1 && sum4 == sum1) {
+    System.out.println("MAGIC SQUARE..");
+} else {
+    System.out.println("Not a MAGIC SQUARE..");
+}
+
+    }
+    static void matclock(){
+         System.out.print("enter the array row size: ");
+        int n =sc.nextInt();
+         System.out.print("enter the array column size: ");
+        int m =sc.nextInt();
+        System.out.println("enter the array elements: ");
+        int [][] arr=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+             System.out.print("Enter row["+i+"] of column ["+j+"]  element: ");
+              arr[i][j]=sc.nextInt();
+            }
+            System.out.println(" ");
+        }
+        int rt=0,cl=0,rb=n-1,cr=m-1;
+        for(int i=cl;i<=cr;i++){
+            System.out.print(arr[rt][i]+" ");
+        }
+        rt++;
+        for(int i=rt;i<=rb;i++){
+            System.out.print(arr[i][cr]+" ");
+        }
+        cr--;
+         for(int i=cr;i>=cl;i--){
+            System.out.print(arr[rb][i]+" ");
+        }
+        rb--;
+         for(int i=rb;i>=rt;i--){
+            System.out.print(arr[i][cl]+" ");
+        }
+        cl++;
     }
 }
