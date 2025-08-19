@@ -12,11 +12,12 @@ public class prime {
         // bubbleSortStrings();
     //    productarr();
     // addOne();
+    jumps();
     int arr[][]={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
     // int[] result=arr2rev(arr);
-    for(int j=0;j<result.length;j++){
-    System.out.print(result[j]+" ");
-            }
+    // for(int j=0;j<result.length;j++){
+    // System.out.print(result[j]+" ");
+            // }
            
         
     }
@@ -249,6 +250,28 @@ static int[] arr2rev(int arr[][]) {
         }
     }
     return brr;
+}
+static void jumps(){
+    System.out.print("Enter size of the array: ");
+        int n=sc.nextInt();
+        int [] arr=new int[n];
+        System.out.println("enter the array element");
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        int count=0;
+        for(int i=0;i<n;i+=arr[i]){
+            if(arr[i]==0){
+                System.out.println("No jumps Stuck here..");
+                break;
+            }
+            count++;
+            if(count>n){
+                System.out.println("Stuck in infitine  loop..");
+                break;
+            }
+        }
+        System.out.println(count+" jumps out of the box..!");
 }
 
 }

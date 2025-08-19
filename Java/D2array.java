@@ -8,7 +8,9 @@ public class D2array {
         // abovenumsum();
         // arr90deg();
         // magicmatrix();
-        matclock();
+        // matclock();
+        transpose();
+      
     }
 //=========================================================================2D ARRAYS=================================================================================
     static void matarray(){
@@ -170,6 +172,7 @@ if (magic && sum3 == sum1 && sum4 == sum1) {
             System.out.println(" ");
         }
         int rt=0,cl=0,rb=n-1,cr=m-1;
+        for(int j=rt;j<cr;j++){
         for(int i=cl;i<=cr;i++){
             System.out.print(arr[rt][i]+" ");
         }
@@ -187,4 +190,33 @@ if (magic && sum3 == sum1 && sum4 == sum1) {
         }
         cl++;
     }
+    }
+    static void transpose(){
+         System.out.print("enter the array row size: ");
+        int n =sc.nextInt();
+         System.out.print("enter the array column size: ");
+        int m =sc.nextInt();
+        System.out.println("enter the array elements: ");
+        int [][] a=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+             System.out.print("Enter row["+i+"] of column ["+j+"]  element: ");
+              a[i][j]=sc.nextInt();
+            }
+            System.out.println( );
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                System.out.print(a[i][j]);
+            }
+            System.out.println( );
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                System.out.print(a[j][i]);
+            }
+            System.out.println( );
+        }
+    }
+   
 }
