@@ -5,12 +5,13 @@ public class Strings {
     public static void main(String[] args) {
         // String a="       aaaaaaaaaa   bb    ccc   ";
          System.out.println("Enter a String: ");
-        // String p=sc.nextLine();
+        String p=sc.nextLine();
         // System.out.println(p.length());
         // String result=reverse_String(p);
         // String result=word_reve_String(p);
         // String result=trim_Space(p);
-        String result=add_num_String();
+        // String result=add_num_String();
+        int  result=len_last_word(p);
         System.out.println(result);
     }
 //================================================================================REVERSE OF THE STRING=======================================
@@ -71,15 +72,25 @@ public class Strings {
                 int j=i;
                 String num="";
                 while(j<p.length()&&p.charAt(j)!=' '){
-                num+=p.charAt(j);
-                System.out.println(num+"#");
-                j++;
+                    num+=p.charAt(j);
+                    j++;
                 }
                 sum+=Integer.parseInt(num);
-                System.out.println(sum+"@");
             }
         }
         System.out.println(sum);
         return null;
+    }
+    static int len_last_word(String p){
+        String result="";
+        p.trim();
+        for(int i=p.length()-1;i>=0;i--){
+            char ch=p.charAt(i);
+            if(ch==' '){
+                break;
+            }
+            result+=(ch);
+        }   
+        return result.length();
     }
 }
