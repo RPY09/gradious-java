@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class Strings {
     static Scanner sc=new Scanner(System.in);
     public static void main(String[] args) {
-         System.out.print("Enter a String: ");
-        String p=sc.nextLine();
-        System.out.println(p.length());
+        // String a="       aaaaaaaaaa   bb    ccc   ";
+         System.out.println("Enter a String: ");
+        // String p=sc.nextLine();
+        // System.out.println(p.length());
         // String result=reverse_String(p);
         // String result=word_reve_String(p);
-        String result=trim_Space(p);
+        // String result=trim_Space(p);
+        String result=add_num_String();
         System.out.println(result);
     }
 //================================================================================REVERSE OF THE STRING=======================================
@@ -56,8 +58,28 @@ public class Strings {
             }
         }
         result+=word;
-        System.out.println(result.length());
+        // System.out.println(result.length());
         return result;
         
+    }
+    static String add_num_String(){
+        int sum=0;
+        String p="first i brought 10 box next i bought 313 box next i bought 10000 box next i brougth 1 box";
+        for(int i=0;i<p.length();i++){
+            char ch=p.charAt(i);
+            if(ch=='1'||ch=='2'||ch=='3'||ch=='4'||ch=='5'||ch=='6'||ch=='7'||ch=='8'||ch=='9'||ch=='0'){
+                int j=i;
+                String num="";
+                while(j<p.length()&&p.charAt(j)!=' '){
+                num+=p.charAt(j);
+                System.out.println(num+"#");
+                j++;
+                }
+                sum+=Integer.parseInt(num);
+                System.out.println(sum+"@");
+            }
+        }
+        System.out.println(sum);
+        return null;
     }
 }
