@@ -16,9 +16,11 @@ public class Strings {
         // System.out.println(result);
         // anagram();
         // System.out.println(romantoint(p));
-        String arr[]={"flower","flows","fls","flight"};
+        // String arr[]={"ab","a"};
         // System.out.println(arr[0].charAt(0));
-        System.out.println(longest_prefix(arr));
+        // System.out.println(longest_prefix(arr));
+        
+        binaryadd();
     }
 //================================================================================REVERSE OF THE STRING========================================================================
     static String reverse_String(String p){
@@ -177,10 +179,11 @@ public class Strings {
     }
     static String longest_prefix(String[] arr){
         String res="";
-        for(int i=0;i<arr.length;i++){
+        for(int i=0;i<arr[0].length();i++){
             char ch=arr[0].charAt(i);
+
             for(int j=1;j<arr.length;j++){
-                if(arr[j].charAt(i)!=ch){
+                if(i<arr[j].length() && arr[j].charAt(i)!=ch){
                     return res;
                 }
             }
@@ -188,4 +191,34 @@ public class Strings {
         }
         return res;
     }
+    static void binaryadd() {
+        String a = "1";
+        String b = "";
+        int i = a.length() - 1, j = b.length() - 1, carry = 0;
+        String res = "";
+        // Loop until both strings are processed and carry is zero
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int digitA = (i >= 0) ? a.charAt(i) - '0' : 0;
+            int digitB = (j >= 0) ? b.charAt(j) - '0' : 0;
+            int sum = digitA + digitB + carry;
+            // Compute current digit and new carry
+            if (sum == 0) {
+                res = "0" + res;
+                carry = 0;
+            } else if (sum == 1) {
+                res = "1" + res;
+                carry = 0;
+            } else if (sum == 2) {
+                res = "0" + res;
+                carry = 1;
+            } else if (sum == 3) {
+                res = "1" + res;
+                carry = 1;
+            }
+            i--;
+            j--;
+        }
+        System.out.println(res);
+    }
+ 
 }
