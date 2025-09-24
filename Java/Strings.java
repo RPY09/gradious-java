@@ -147,10 +147,8 @@ public class Strings {
             for(int i=0;i<s.length();i++){
                 char ch=s.charAt(i);
                 switch(ch){
-                    case 'I':
-                    num=1;
+                    case 'I':num=1;
                     break;
-
                     case 'V':num=5;
                     break;
                     case 'X':num=10;
