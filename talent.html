@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talent Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+      .page-content {
+        display: none;
+      }
+      .page-content.active {
+        display: block;
+      }
+      .card {
+        background-color: #161b22;
+        border: 1px solid #30363d;
+      }
+      .nav-btn.active {
+        background-color: #238636;
+        color: #f0f6fc;
+      }
+      .btn-primary {
+        background-color: #238636;
+        color: #f0f6fc;
+        transition: background-color 0.2s;
+      }
+      .btn-primary:hover {
+        background-color: #2ea043;
+      }
+      .btn-secondary {
+        background-color: #21262d;
+        border: 1px solid #30363d;
+        color: #c9d1d9;
+        transition: background-color 0.2s;
+      }
+      .btn-secondary:hover {
+        background-color: #30363d;
+      }
+      .scroll-container::-webkit-scrollbar {
+        width: 8px;
+        background-color: #21262d;
+      }
+      .scroll-container::-webkit-scrollbar-thumb {
+        background-color: #30363d;
+        border-radius: 4px;
+      }
+      .scroll-container::-webkit-scrollbar-thumb:hover {
+        background-color: #444c56;
+      }
+    </style>
+  </head>
+  <body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto rounded-xl shadow-lg p-6 md:p-10 card">
+      <header
+        class="flex flex-col md:flex-row items-center justify-between pb-6 mb-6 border-b border-gray-700"
+      >
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-100 mb-4 md:mb-0">
+          Talent Tracker for College
+        </h1>
+        <nav class="flex flex-wrap gap-2 md:gap-4">
+          <button
+            id="nav-dashboard"
+            class="nav-btn px-4 py-2 rounded-md font-semibold text-sm md:text-base btn-secondary active"
+          >
+            Dashboard
+          </button>
+          <button
+            id="nav-students"
+            class="nav-btn px-4 py-2 rounded-md font-semibold text-sm md:text-base btn-secondary"
+          >
+            Students
+          </button>
+          <button
+            id="nav-admin"
+            class="nav-btn px-4 py-2 rounded-md font-semibold text-sm md:text-base btn-secondary"
+          >
+            Admin
+          </button>
+        </nav>
+      </header>
+
+      <!-- Dashboard Page -->
+      <section id="dashboard-page" class="page-content active">
+        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-gray-100">
+          Overview
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="card p-6 rounded-lg text-center">
+            <h3 class="text-lg text-gray-400">Total Students</h3>
+            <p
+              id="total-students"
+              class="text-4xl font-bold mt-2 text-blue-400"
+            >
+              0
+            </p>
+          </div>
+          <div class="card p-6 rounded-lg text-center">
+            <h3 class="text-lg text-gray-400">Placed Students</h3>
+            <p
+              id="placed-students"
+              class="text-4xl font-bold mt-2 text-green-400"
+            >
+              0
+            </p>
+          </div>
+          <div class="card p-6 rounded-lg text-center">
+            <h3 class="text-lg text-gray-400">Pending Placements</h3>
+            <p
+              id="pending-students"
+              class="text-4xl font-bold mt-2 text-yellow-400"
+            >
+              0
+            </p>
+          </div>
+        </div>
+        <div id="dashboard-chart-container" class="mt-8">
+          <h3 class="text-lg text-gray-400 mb-2">Placement Progress</h3>
+          <div class="card p-6 rounded-lg">
+            <div
+              id="placement-progress-bar"
+              class="w-full bg-gray-700 rounded-full h-8 overflow-hidden"
+            >
+              <div
+                id="placed-bar"
+                class="bg-green-500 h-8 text-white flex items-center justify-end pr-2 transition-all duration-500 ease-out font-medium"
+                style="width: 0%"
+              >
+                0%
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Student List Page -->
+      <section id="student-list-page" class="page-content">
+        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-gray-100">
+          Student List
+        </h2>
+        <div class="mb-4 flex flex-col sm:flex-row gap-4">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search by name or roll number..."
+            class="flex-1 p-3 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <select
+            id="status-filter"
+            class="p-3 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="All">All Statuses</option>
+            <option value="Placed">Placed</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+        <div
+          class="overflow-x-auto scroll-container max-h-[600px] card rounded-lg p-2 md:p-4"
+        >
+          <table
+            id="students-table"
+            class="min-w-full divide-y divide-gray-700"
+          >
+            <thead class="sticky top-0 bg-gray-900 z-10">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                >
+                  Name
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                >
+                  Roll No.
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                >
+                  Major
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                >
+                  Status
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                >
+                  Company
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800" id="students-table-body">
+              <!-- Student data will be dynamically injected here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Student Profile Page -->
+      <section id="student-profile-page" class="page-content">
+        <div class="flex items-center mb-4">
+          <button
+            onclick="showPage('student-list-page')"
+            class="btn-secondary px-4 py-2 rounded-md flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to List
+          </button>
+        </div>
+        <div class="card p-6 rounded-lg">
+          <h2 id="profile-name" class="text-3xl font-bold mb-4"></h2>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <span class="font-medium text-gray-400 w-32">Roll Number:</span>
+              <span id="profile-roll" class="text-gray-100"></span>
+            </div>
+            <div class="flex items-center">
+              <span class="font-medium text-gray-400 w-32">Major:</span>
+              <span id="profile-major" class="text-gray-100"></span>
+            </div>
+            <div class="flex items-center">
+              <span class="font-medium text-gray-400 w-32">GPA:</span>
+              <span id="profile-gpa" class="text-gray-100"></span>
+            </div>
+            <div class="flex items-center">
+              <span class="font-medium text-gray-400 w-32">Status:</span>
+              <span
+                id="profile-status"
+                class="px-2 py-1 rounded-full font-semibold"
+              ></span>
+            </div>
+            <div
+              id="profile-company-div"
+              class="flex items-center"
+              style="display: none"
+            >
+              <span class="font-medium text-gray-400 w-32">Company:</span>
+              <span id="profile-company" class="text-gray-100"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin/Management Page -->
+      <section id="admin-page" class="page-content">
+        <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-100">
+          Admin Panel
+        </h2>
+
+        <!-- Add/Edit Student Form -->
+        <div class="card p-6 rounded-lg mb-8">
+          <h3 id="form-title" class="text-xl font-semibold mb-4">
+            Add New Student
+          </h3>
+          <form id="student-form" class="space-y-4">
+            <input type="hidden" id="student-id" />
+            <div>
+              <label
+                for="student-name"
+                class="block text-sm font-medium text-gray-400"
+                >Student Name</label
+              >
+              <input
+                type="text"
+                id="student-name"
+                required
+                class="mt-1 block w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                for="student-roll"
+                class="block text-sm font-medium text-gray-400"
+                >Roll Number</label
+              >
+              <input
+                type="text"
+                id="student-roll"
+                required
+                class="mt-1 block w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                for="student-major"
+                class="block text-sm font-medium text-gray-400"
+                >Major</label
+              >
+              <input
+                type="text"
+                id="student-major"
+                required
+                class="mt-1 block w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                for="student-gpa"
+                class="block text-sm font-medium text-gray-400"
+                >GPA</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="student-gpa"
+                required
+                class="mt-1 block w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                for="student-status"
+                class="block text-sm font-medium text-gray-400"
+                >Placement Status</label
+              >
+              <select
+                id="student-status"
+                required
+                class="mt-1 block w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="Pending">Pending</option>
+                <option value="Placed">Placed</option>
+              </select>
+            </div>
+            <div id="company-field" style="display: none">
+              <label
+                for="student-company"
+                class="block text-sm font-medium text-gray-400"
+                >Company</label
+              >
+              <input
+                type="text"
+                id="student-company"
+                class="mt-1 block w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div class="flex gap-4">
+              <button
+                type="submit"
+                class="px-6 py-3 rounded-md font-semibold btn-primary"
+              >
+                Save Student
+              </button>
+              <button
+                type="button"
+                id="cancel-edit"
+                class="px-6 py-3 rounded-md font-semibold btn-secondary"
+                style="display: none"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-4">Manage Students</h3>
+          <div class="overflow-x-auto scroll-container max-h-[400px]">
+            <table class="min-w-full divide-y divide-gray-700">
+              <thead class="sticky top-0 bg-gray-900 z-10">
+                <tr>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                  >
+                    Name
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                  >
+                    Roll No.
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800" id="admin-table-body">
+                <!-- Admin student data will be dynamically injected here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Custom Message Box -->
+      <div
+        id="message-box"
+        class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center hidden"
+      >
+        <div
+          class="bg-gray-800 p-6 rounded-lg max-w-sm w-full mx-4 border border-gray-700"
+        >
+          <p id="message-text" class="text-center text-lg mb-4"></p>
+          <div class="flex justify-center">
+            <button
+              id="message-ok"
+              class="px-6 py-2 rounded-md font-semibold btn-primary"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Custom Confirmation Box -->
+      <div
+        id="confirm-box"
+        class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center hidden"
+      >
+        <div
+          class="bg-gray-800 p-6 rounded-lg max-w-sm w-full mx-4 border border-gray-700"
+        >
+          <p id="confirm-text" class="text-center text-lg mb-4"></p>
+          <div class="flex justify-center gap-4">
+            <button
+              id="confirm-yes"
+              class="px-6 py-2 rounded-md font-semibold btn-primary"
+            >
+              Yes
+            </button>
+            <button
+              id="confirm-no"
+              class="px-6 py-2 rounded-md font-semibold btn-secondary"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let students = [];
+        const LOCAL_STORAGE_KEY = "talentTrackerData";
+
+        // Sample data to start with
+        const initialStudents = [
+          {
+            id: "1",
+            name: "Alex Johnson",
+            rollNumber: "CS2023001",
+            major: "Computer Science",
+            gpa: 3.8,
+            placementStatus: "Placed",
+            company: "Google",
+          },
+          {
+            id: "2",
+            name: "Maria Garcia",
+            rollNumber: "EE2023002",
+            major: "Electrical Engineering",
+            gpa: 3.5,
+            placementStatus: "Pending",
+          },
+          {
+            id: "3",
+            name: "Sam Wilson",
+            rollNumber: "ME2023003",
+            major: "Mechanical Engineering",
+            gpa: 3.9,
+            placementStatus: "Placed",
+            company: "Tesla",
+          },
+          {
+            id: "4",
+            name: "Sophia Lee",
+            rollNumber: "CS2023004",
+            major: "Computer Science",
+            gpa: 3.7,
+            placementStatus: "Pending",
+          },
+        ];
+
+        const dashboardPage = document.getElementById("dashboard-page");
+        const studentListPage = document.getElementById("student-list-page");
+        const studentProfilePage = document.getElementById(
+          "student-profile-page"
+        );
+        const adminPage = document.getElementById("admin-page");
+
+        const navButtons = document.querySelectorAll(".nav-btn");
+        const studentTableBody = document.getElementById("students-table-body");
+        const adminTableBody = document.getElementById("admin-table-body");
+        const studentForm = document.getElementById("student-form");
+        const formTitle = document.getElementById("form-title");
+        const cancelEditButton = document.getElementById("cancel-edit");
+        const statusSelect = document.getElementById("student-status");
+        const companyField = document.getElementById("company-field");
+        const messageBox = document.getElementById("message-box");
+        const messageText = document.getElementById("message-text");
+        const messageOkButton = document.getElementById("message-ok");
+        const confirmBox = document.getElementById("confirm-box");
+        const confirmText = document.getElementById("confirm-text");
+        const confirmYesButton = document.getElementById("confirm-yes");
+        const confirmNoButton = document.getElementById("confirm-no");
+        let confirmCallback = null;
+
+        function showMessage(text) {
+          messageText.textContent = text;
+          messageBox.classList.remove("hidden");
+        }
+
+        messageOkButton.addEventListener("click", () => {
+          messageBox.classList.add("hidden");
+        });
+
+        function showConfirm(text, callback) {
+          confirmText.textContent = text;
+          confirmBox.classList.remove("hidden");
+          confirmCallback = callback;
+        }
+
+        confirmYesButton.addEventListener("click", () => {
+          confirmBox.classList.add("hidden");
+          if (confirmCallback) {
+            confirmCallback(true);
+          }
+        });
+
+        confirmNoButton.addEventListener("click", () => {
+          confirmBox.classList.add("hidden");
+          if (confirmCallback) {
+            confirmCallback(false);
+          }
+        });
+
+        function loadData() {
+          try {
+            const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (data) {
+              students = JSON.parse(data);
+            } else {
+              // Load initial data if local storage is empty
+              students = initialStudents;
+            }
+          } catch (e) {
+            console.error("Error loading data from local storage:", e);
+            students = initialStudents;
+          }
+        }
+
+        function saveData() {
+          try {
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(students));
+          } catch (e) {
+            console.error("Error saving data to local storage:", e);
+          }
+        }
+
+        function renderDashboard() {
+          const total = students.length;
+          const placed = students.filter(
+            (s) => s.placementStatus === "Placed"
+          ).length;
+          const pending = total - placed;
+
+          document.getElementById("total-students").textContent = total;
+          document.getElementById("placed-students").textContent = placed;
+          document.getElementById("pending-students").textContent = pending;
+
+          const placedPercentage = total > 0 ? (placed / total) * 100 : 0;
+          const placedBar = document.getElementById("placed-bar");
+          placedBar.style.width = `${placedPercentage}%`;
+          placedBar.textContent = `${Math.round(placedPercentage)}%`;
+        }
+
+        function renderStudentList(searchQuery = "", filterStatus = "All") {
+          studentTableBody.innerHTML = "";
+          const filteredStudents = students.filter((student) => {
+            const matchesSearch =
+              student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              student.rollNumber
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase());
+            const matchesFilter =
+              filterStatus === "All" ||
+              student.placementStatus === filterStatus;
+            return matchesSearch && matchesFilter;
+          });
+
+          if (filteredStudents.length === 0) {
+            studentTableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No students found.</td></tr>`;
+            return;
+          }
+
+          filteredStudents.forEach((student) => {
+            const statusClass =
+              student.placementStatus === "Placed"
+                ? "bg-green-500"
+                : "bg-yellow-500";
+            const row = `
+                        <tr class="hover:bg-gray-800 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">${
+                              student.name
+                            }</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${
+                              student.rollNumber
+                            }</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${
+                              student.major
+                            }</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass} text-white">
+                                    ${student.placementStatus}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${
+                              student.company || "N/A"
+                            }</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="window.viewStudentProfile('${
+                                  student.id
+                                }')" class="text-blue-400 hover:text-blue-300">View</button>
+                            </td>
+                        </tr>
+                    `;
+            studentTableBody.innerHTML += row;
+          });
+        }
+
+        function renderAdminTable() {
+          adminTableBody.innerHTML = "";
+          if (students.length === 0) {
+            adminTableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No students found.</td></tr>`;
+            return;
+          }
+          students.forEach((student) => {
+            const statusClass =
+              student.placementStatus === "Placed"
+                ? "bg-green-500"
+                : "bg-yellow-500";
+            const row = `
+                        <tr class="hover:bg-gray-800 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">${student.name}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${student.rollNumber}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass} text-white">
+                                    ${student.placementStatus}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <button onclick="window.editStudent('${student.id}')" class="text-yellow-400 hover:text-yellow-300">Edit</button>
+                                <button onclick="window.deleteStudent('${student.id}')" class="text-red-400 hover:text-red-300">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+            adminTableBody.innerHTML += row;
+          });
+        }
+
+        function showPage(pageId) {
+          // Hide all pages first
+          document.querySelectorAll(".page-content").forEach((page) => {
+            page.classList.remove("active");
+          });
+          // Show the requested page
+          document.getElementById(pageId).classList.add("active");
+
+          // Set the active state for the corresponding nav button
+          navButtons.forEach((btn) => btn.classList.remove("active"));
+          const navButtonId = `nav-${pageId.replace("-page", "")}`;
+          const navButton = document.getElementById(navButtonId);
+          // This check is crucial to prevent the TypeError when a page (like student profile) has no nav button.
+          if (navButton) {
+            navButton.classList.add("active");
+          }
+
+          // Render content for the selected page
+          if (pageId === "dashboard-page") {
+            renderDashboard();
+          } else if (pageId === "student-list-page") {
+            renderStudentList();
+          } else if (pageId === "admin-page") {
+            renderAdminTable();
+          }
+        }
+
+        navButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const pageId = button.id.replace("nav-", "") + "-page";
+            showPage(pageId);
+          });
+        });
+
+        // Implement view student profile functionality
+        window.viewStudentProfile = (id) => {
+          const student = students.find((s) => s.id === id);
+          if (student) {
+            document.getElementById("profile-name").textContent = student.name;
+            document.getElementById("profile-roll").textContent =
+              student.rollNumber;
+            document.getElementById("profile-major").textContent =
+              student.major;
+            document.getElementById("profile-gpa").textContent = student.gpa;
+
+            const statusSpan = document.getElementById("profile-status");
+            statusSpan.textContent = student.placementStatus;
+            statusSpan.classList.remove("bg-green-500", "bg-yellow-500");
+            if (student.placementStatus === "Placed") {
+              statusSpan.classList.add(
+                "bg-green-500",
+                "text-white",
+                "px-2",
+                "py-1"
+              );
+              document.getElementById("profile-company-div").style.display =
+                "flex";
+              document.getElementById("profile-company").textContent =
+                student.company;
+            } else {
+              statusSpan.classList.add(
+                "bg-yellow-500",
+                "text-white",
+                "px-2",
+                "py-1"
+              );
+              document.getElementById("profile-company-div").style.display =
+                "none";
+            }
+            showPage("student-profile-page");
+          } else {
+            showMessage("Student not found.");
+          }
+        };
+
+        // Handle student form submission
+        studentForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const studentId = document.getElementById("student-id").value;
+          const newStudent = {
+            name: document.getElementById("student-name").value,
+            rollNumber: document.getElementById("student-roll").value,
+            major: document.getElementById("student-major").value,
+            gpa: parseFloat(document.getElementById("student-gpa").value),
+            placementStatus: document.getElementById("student-status").value,
+          };
+          if (newStudent.placementStatus === "Placed") {
+            newStudent.company =
+              document.getElementById("student-company").value;
+          }
+
+          if (studentId) {
+            // Edit existing student
+            const index = students.findIndex((s) => s.id === studentId);
+            if (index !== -1) {
+              students[index] = { ...students[index], ...newStudent };
+              showMessage("Student updated successfully!");
+            }
+          } else {
+            // Add new student
+            newStudent.id = Date.now().toString();
+            students.push(newStudent);
+            showMessage("Student added successfully!");
+          }
+
+          saveData();
+          renderAdminTable();
+          studentForm.reset();
+          formTitle.textContent = "Add New Student";
+          document.getElementById("student-id").value = "";
+          cancelEditButton.style.display = "none";
+          companyField.style.display = "none";
+        });
+
+        // Function to set up the form for editing
+        window.editStudent = (id) => {
+          const student = students.find((s) => s.id === id);
+          if (student) {
+            document.getElementById("student-id").value = student.id;
+            document.getElementById("student-name").value = student.name;
+            document.getElementById("student-roll").value = student.rollNumber;
+            document.getElementById("student-major").value = student.major;
+            document.getElementById("student-gpa").value = student.gpa;
+            document.getElementById("student-status").value =
+              student.placementStatus;
+            if (student.placementStatus === "Placed") {
+              companyField.style.display = "block";
+              document.getElementById("student-company").value =
+                student.company || "";
+            } else {
+              companyField.style.display = "none";
+            }
+            formTitle.textContent = `Edit Student: ${student.name}`;
+            cancelEditButton.style.display = "inline-block";
+            showPage("admin-page");
+          }
+        };
+
+        // Function to delete a student
+        window.deleteStudent = (id) => {
+          showConfirm(
+            "Are you sure you want to delete this student?",
+            (isConfirmed) => {
+              if (isConfirmed) {
+                students = students.filter((s) => s.id !== id);
+                saveData();
+                renderAdminTable();
+                showMessage("Student deleted successfully!");
+              }
+            }
+          );
+        };
+
+        cancelEditButton.addEventListener("click", () => {
+          studentForm.reset();
+          document.getElementById("student-id").value = "";
+          formTitle.textContent = "Add New Student";
+          cancelEditButton.style.display = "none";
+          companyField.style.display = "none";
+        });
+
+        // Toggle company field visibility based on status
+        statusSelect.addEventListener("change", () => {
+          if (statusSelect.value === "Placed") {
+            companyField.style.display = "block";
+            document
+              .getElementById("student-company")
+              .setAttribute("required", "required");
+          } else {
+            companyField.style.display = "none";
+            document
+              .getElementById("student-company")
+              .removeAttribute("required");
+          }
+        });
+
+        // Student list search and filter
+        document
+          .getElementById("search-input")
+          .addEventListener("input", (e) => {
+            const query = e.target.value;
+            const filter = document.getElementById("status-filter").value;
+            renderStudentList(query, filter);
+          });
+
+        document
+          .getElementById("status-filter")
+          .addEventListener("change", (e) => {
+            const query = document.getElementById("search-input").value;
+            const filter = e.target.value;
+            renderStudentList(query, filter);
+          });
+
+        // Initial load
+        loadData();
+        saveData();
+        showPage("dashboard-page");
+      });
+    </script>
+  </body>
+</html>

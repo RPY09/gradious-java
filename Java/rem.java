@@ -2,8 +2,8 @@ import java.util.Scanner;
 public class rem {
     static Scanner sc=new Scanner(System.in);
     public static void main(String[] args) {
-        even_dash();
-        // System.out.println(duck());
+        // even_dash();
+        System.out.println(duck());
     }
        
     static void even_dash(){
@@ -32,15 +32,12 @@ public class rem {
         System.out.print("Enter a number: ");
         int n=sc.nextInt();
         boolean a=false;
-        String result="";
-        String rev="";
         while(n>0){
             int rem=n%10;
             
             if(rem==0){
                        a=true;
                         return a;
-
             }
             n=n/10;
         }
