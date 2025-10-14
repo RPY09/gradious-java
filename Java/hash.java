@@ -71,7 +71,7 @@ public class hash {
         Roman.put('d', 500);
         Roman.put('m',1000);
         // System.out.println(Roman);
-        String ronum="CMICIX".toLowerCase();
+        String ronum="CMXCIX".toLowerCase();
         int num=0;
         for(int i=0;i<ronum.length();i++){
             char ch=ronum.charAt(i);
