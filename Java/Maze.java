@@ -19,19 +19,19 @@ public class maze {
         int cols = maze[0].length;
         if (x == rows - 1 && y == cols - 1) {
             reached[0] = true;
-            System.out.println("reach");
+            System.out.println(x+","+y);
             return;
         }
 
         // move right
         if (x < rows && y + 1 < cols && maze[x][y + 1] != 0) {
-            System.out.println("right");
+            System.out.println(x+","+y);
             ratTravel(x, y + 1, maze, reached);
         }
 
         // move down
         if (x + 1 < rows && y < cols && maze[x + 1][y] != 0) {
-            System.out.println("bottom");
+            System.out.println(x+","+y);
             ratTravel(x + 1, y, maze, reached);
         }
     }
