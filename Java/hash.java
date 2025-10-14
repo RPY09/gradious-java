@@ -5,7 +5,8 @@ public class hash {
         // stringfreq();
         // twoSum();
         // twoSumHash();
-        romanInteger();
+        // romanInteger();
+        longestUniqueSubString();
     }
     static void stringfreq(){
         String words="rpranavyadav";
@@ -85,5 +86,30 @@ public class hash {
             
         }
         System.out.println(num);
+    }
+    static void longestUniqueSubString(){
+        int max=0;
+        String s="tgfvbhjikjhbgv";
+        int i =0 ;
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int j=0;j<s.length();j++){
+            char ch=s.charAt(j);
+            int currentUniqueWindow=j-i;
+            
+            if(map.get(ch)!=null){
+                if(currentUniqueWindow>max){
+                max=currentUniqueWindow;
+            }
+                while (map.get(ch)!=null) {
+                    char chi=s.charAt(i);
+                    map.remove(chi);
+                    i++;
+                }
+            }
+            else{
+                map.put(ch, j);
+            }
+        }
+        System.out.println(max);
     }
 }
