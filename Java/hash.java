@@ -4,7 +4,8 @@ public class hash {
     public static void main(String[] args) {
         // stringfreq();
         // twoSum();
-        twoSumHash();
+        // twoSumHash();
+        romanInteger();
     }
     static void stringfreq(){
         String words="rpranavyadav";
@@ -59,5 +60,30 @@ public class hash {
         map.put(arr[i], i);
       }
     }
-}
+    }
+    static void romanInteger(){
+        HashMap<Character,Integer> Roman =new HashMap<>();
+        Roman.put('i', 1);
+        Roman.put('v', 5);
+        Roman.put('x', 10);
+        Roman.put('l', 50);
+        Roman.put('c', 100);
+        Roman.put('d', 500);
+        Roman.put('m',1000);
+        // System.out.println(Roman);
+        String ronum="CMICIX".toLowerCase();
+        int num=0;
+        for(int i=0;i<ronum.length();i++){
+            char ch=ronum.charAt(i);
+            
+            if(i+1<ronum.length() && Roman.get(ch)<Roman.get(ronum.charAt(i+1))){
+                num+=-(Roman.get(ch));
+            }
+            else{
+                num+=Roman.get(ch);
+            }
+            
+        }
+        System.out.println(num);
+    }
 }
