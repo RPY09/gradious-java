@@ -2,7 +2,8 @@ import java.util.HashMap;
 
 public class hash {
     public static void main(String[] args) {
-        stringfreq();
+        // stringfreq();
+        twoSum();
     }
     static void stringfreq(){
         String words="rpranavyadav";
@@ -19,5 +20,22 @@ public class hash {
             }
         }
         System.out.println(letters);
+    }
+    static void twoSum(){
+        int arr[]={1,2,3,4,5,6,7,8,9};
+        int target=10;
+        int left=0;
+        int right=arr.length-1;
+        while(left<right){
+            if(arr[left]+arr[right]==target){
+                System.out.println(left +","+right);
+            }
+            if(arr[left]+arr[right]<target){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
     }
 }
