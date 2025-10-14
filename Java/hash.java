@@ -6,12 +6,13 @@ public class hash {
     }
     static void stringfreq(){
         String words="rpranavyadav";
-        int count=0;
+        // int count=0;
         HashMap<Character,Integer> letters=new HashMap<>();
         for(int i=0;i<words.length();i++){
             char ch=words.charAt(i);
             if(letters.containsKey(ch)){
-                letters.put(ch,count++);
+                int count =letters.get(ch);
+                letters.put(ch,count+1);
             }
             else{
                 letters.put(ch,1);
