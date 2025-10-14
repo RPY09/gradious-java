@@ -3,7 +3,8 @@ import java.util.HashMap;
 public class hash {
     public static void main(String[] args) {
         // stringfreq();
-        twoSum();
+        // twoSum();
+        twoSumHash();
     }
     static void stringfreq(){
         String words="rpranavyadav";
@@ -38,4 +39,25 @@ public class hash {
             }
         }
     }
+    static void twoSumHash()
+  {
+         int arr[]={1,2,3,4,5,6,7,8,9};
+        int target=10;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    
+    for (int i = 0; i < arr.length; i++)
+    {
+      int b = target - arr[i];
+      if( map.get(b) != null )
+      {
+        // its a match..
+        int bi = map.get(b);
+        System.out.println(bi+","+ i);
+      }
+      else 
+      {
+        map.put(arr[i], i);
+      }
+    }
+}
 }
