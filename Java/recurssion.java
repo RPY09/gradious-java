@@ -1,19 +1,24 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class recurssion {
     public static void main(String[] args) {
+        List<Integer> brr=new ArrayList<>();
         // numbersBacktrack(9);
         // backTrackNumbers(1,9);
         // System.out.println(sumOfNaturalNum(5));
         // System.out.println(backtrackSumOfNatural(0,9));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,9));
-        int [] arr={1,2,3,4,5};
+        int [] arr={3,1,2};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
         // }
         String str="121";
         // System.out.println(isPalindrome(str,0,str.length()));
-        System.out.println(fibanocci(9));
+        // System.out.println(fibanocci(9));
+        subSequenceArray(0,brr,arr);
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -109,5 +114,18 @@ public class recurssion {
             return n;
         }
         return fibanocci(n-1)+fibanocci(n-2);
+    }
+
+    //call the function and when the i is grater than the length of the arr
+
+    static void subSequenceArray(int i,List<Integer> brr,int[] arr){
+        if(i>=arr.length){
+            System.out.println(brr);
+            return;
+        }
+        brr.add(arr[i]);
+        subSequenceArray(i+1,brr,arr);
+        brr.remove(brr.size()-1);
+        subSequenceArray(i+1,brr,arr);
     }
 }
