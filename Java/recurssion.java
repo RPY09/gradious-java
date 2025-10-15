@@ -7,10 +7,12 @@ public class recurssion {
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,9));
         int [] arr={1,2,3,4,5};
-        int res[]=reverseArray(arr,0,arr.length-1);
-        for(int num:res){
-            System.out.println(num+" ");
-        }
+        // int res[]=reverseArray(arr,0,arr.length-1);
+        // for(int num:res){
+        //     System.out.println(num+" ");
+        // }
+        String str="121";
+        System.out.println(isPalindrome(str,0,str.length()));
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -69,7 +71,7 @@ public class recurssion {
         return i*backtrackFactorial(i+1, n);
     }
 
-    //
+    //call the funcion and then swap the elements and then when the i and n cross or meet at point then return the arr;
 
     static int[] reverseArray(int[] arr,int i, int n){
         if(i>=n){
@@ -78,9 +80,24 @@ public class recurssion {
         swap(arr,i,n);
         return reverseArray(arr, i+1, n-1);
     }
+    
+    //swap the elements of the arr;
+
     static void swap(int[] arr,int i,int n){
         int t=arr[i];
         arr[i]=arr[n];
         arr[n]=t;
+    }
+    
+    //
+
+    static boolean isPalindrome(String s,int i,int n){
+        if(i>=n){
+            return true;
+        }
+        if(s.charAt(i)!=s.charAt(n-i-1)){
+            return false;
+        }
+        return isPalindrome(s, i+1, n);
     }
 }
