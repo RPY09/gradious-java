@@ -12,7 +12,8 @@ public class recurssion {
         //     System.out.println(num+" ");
         // }
         String str="121";
-        System.out.println(isPalindrome(str,0,str.length()));
+        // System.out.println(isPalindrome(str,0,str.length()));
+        System.out.println(fibanocci(9));
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -89,7 +90,7 @@ public class recurssion {
         arr[n]=t;
     }
     
-    //
+    //call the function and then check that first and last index are the same if not return the false or if i cross or meet the n then return true;
 
     static boolean isPalindrome(String s,int i,int n){
         if(i>=n){
@@ -99,5 +100,14 @@ public class recurssion {
             return false;
         }
         return isPalindrome(s, i+1, n);
+    }
+
+    //
+
+    static int fibanocci(int n){
+        if(n<=1){
+            return n;
+        }
+        return fibanocci(n-1)+fibanocci(n-2);
     }
 }
