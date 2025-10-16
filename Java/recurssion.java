@@ -10,7 +10,7 @@ public class recurssion {
         // System.out.println(backtrackSumOfNatural(0,9));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,9));
-        int [] arr={1,3,5};
+        int [] arr={1,3,5,3,4,2,9};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
@@ -20,7 +20,11 @@ public class recurssion {
         // System.out.println(fibanocci(9));
         // subSequenceArray(0,brr,arr);
         // targetInArray(0,arr,brr,0,9);
-        System.out.println(subArrayOddSum(0,0,arr,brr));
+        // System.out.println(subArrayOddSum(0,0,arr,brr));
+        int[] res = mergesort(arr,0,arr.length-1);
+        for(int num:res){
+            System.out.println(num+" ");
+        };
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -147,7 +151,7 @@ public class recurssion {
         targetInArray(i+1, arr, brr, sum, target);
     }
 
-    //
+    //this returns the count of odd sum in the array and the substring of the array while checking the sum is odd or not 
 
     static int subArrayOddSum(int i,int sum,int[] arr,List<Integer> brr){
         if(i>=arr.length){
@@ -164,5 +168,43 @@ public class recurssion {
         sum-=arr[i];
         int r=subArrayOddSum(i+1, sum, arr, brr);
         return l+r;
+    }
+
+    //
+
+    static int[] mergesort(int[] arr,int low,int high){
+        if(low>=high){
+            return null;
+        }
+        int mid=low+(high-low)/2;
+        mergesort(arr, low, mid);
+        mergesort(arr, mid+1, high);
+        return merge(arr,low,mid,high);
+    }
+    static int[] merge(int[] arr,int low,int mid,int high){
+        List <Integer> temp=new ArrayList<>();
+        int left=low;
+        int right=mid+1;
+        while(left<=mid&&right<=high){
+            if(arr[left]<=arr[right]){
+                temp.add(arr[left]);
+                left++;
+            }else{
+                temp.add(arr[right]);
+                right++;
+            }
+        }
+        while (left<=mid) {
+            temp.add(arr[left]);
+            left++;
+        }
+        while (right<=high) {
+            temp.add(arr[right]);
+            right++;
+        }
+        for(int i=low;i<=high;i++){
+            arr[i]=temp.get(i-low);
+        }
+        return arr;
     }
 }
