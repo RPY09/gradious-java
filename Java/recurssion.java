@@ -10,7 +10,7 @@ public class recurssion {
         // System.out.println(backtrackSumOfNatural(0,9));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,9));
-        int [] arr={1,2,3,4,5};
+        int [] arr={1,3,5};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
@@ -19,7 +19,8 @@ public class recurssion {
         // System.out.println(isPalindrome(str,0,str.length()));
         // System.out.println(fibanocci(9));
         // subSequenceArray(0,brr,arr);
-        targetInArray(0,arr,brr,0,9);
+        // targetInArray(0,arr,brr,0,9);
+        System.out.println(subArrayOddSum(0,0,arr,brr));
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -130,6 +131,7 @@ public class recurssion {
         subSequenceArray(i+1,brr,arr);
     }
 
+    //this is same like subsequence recurrsion just here we are adding the sum and target element and comparing them to check the sum target reach if yes then print the subarray 
 
     static void targetInArray(int i,int[] arr,List<Integer> brr,int sum,int target){
         if(i>=arr.length){
@@ -143,5 +145,24 @@ public class recurssion {
         brr.remove(brr.size()-1);
         sum-=arr[i];
         targetInArray(i+1, arr, brr, sum, target);
+    }
+
+    //
+
+    static int subArrayOddSum(int i,int sum,int[] arr,List<Integer> brr){
+        if(i>=arr.length){
+            if(sum%2!=0){
+                System.out.println(brr);
+                return 1;
+            }
+            return 0;
+        }
+        brr.add(arr[i]);
+        sum+=arr[i];
+        int l=subArrayOddSum(i+1, sum, arr, brr);
+        brr.remove(brr.size()-1);
+        sum-=arr[i];
+        int r=subArrayOddSum(i+1, sum, arr, brr);
+        return l+r;
     }
 }
