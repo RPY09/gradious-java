@@ -10,7 +10,7 @@ public class recurssion {
         // System.out.println(backtrackSumOfNatural(0,9));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,9));
-        int [] arr={3,1,2};
+        int [] arr={1,2,3,4,5};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
@@ -18,7 +18,8 @@ public class recurssion {
         String str="121";
         // System.out.println(isPalindrome(str,0,str.length()));
         // System.out.println(fibanocci(9));
-        subSequenceArray(0,brr,arr);
+        // subSequenceArray(0,brr,arr);
+        targetInArray(0,arr,brr,0,9);
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -116,7 +117,7 @@ public class recurssion {
         return fibanocci(n-1)+fibanocci(n-2);
     }
 
-    //call the function and when the i is grater than the length of the arr
+    //call the function and when the i is grater than or equal the length of the array then the values print here the first element is 3 it add in the list and then call function till i reach the i greater than or equal to length then prints then returns then remove the last element and call the function and then prints the remaining elements. Note the last element removed but the i is still the same but brr elements are changed so it prints the remaining elements in the brr;
 
     static void subSequenceArray(int i,List<Integer> brr,int[] arr){
         if(i>=arr.length){
@@ -127,5 +128,20 @@ public class recurssion {
         subSequenceArray(i+1,brr,arr);
         brr.remove(brr.size()-1);
         subSequenceArray(i+1,brr,arr);
+    }
+
+
+    static void targetInArray(int i,int[] arr,List<Integer> brr,int sum,int target){
+        if(i>=arr.length){
+            if(sum==target){            
+                System.out.println(brr);
+            }return;
+        }
+        brr.add(arr[i]);
+        sum+=arr[i];
+        targetInArray(i+1, arr, brr, sum, target);
+        brr.remove(brr.size()-1);
+        sum-=arr[i];
+        targetInArray(i+1, arr, brr, sum, target);
     }
 }
