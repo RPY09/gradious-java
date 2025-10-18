@@ -8,8 +8,9 @@ public class recurssion {
         // backTrackNumbers(1,9);
         // System.out.println(sumOfNaturalNum(5));
         // System.out.println(backtrackSumOfNatural(0,9));
+        System.out.println(reverseOfNumbers(123,0));
         // System.out.println(factorial(9));
-        // System.out.println(backtrackFactorial(1,9));
+        // System.out.println(backtrackFactorial(1,5));
         int [] arr={1,3,5,3,4,2,9};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
@@ -21,10 +22,10 @@ public class recurssion {
         // subSequenceArray(0,brr,arr);
         // targetInArray(0,arr,brr,0,9);
         // System.out.println(subArrayOddSum(0,0,arr,brr));
-        int[] res = mergesort(arr,0,arr.length-1);
-        for(int num:res){
-            System.out.println(num+" ");
-        };
+        // int[] res = mergesort(arr,0,arr.length-1);
+        // for(int num:res){
+        //     System.out.println(num+" ");
+        // };
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -65,6 +66,17 @@ public class recurssion {
         return i+backtrackSumOfNatural(i+1, n);
     }
 
+    //
+
+    static int reverseOfNumbers(int n,int rev){
+        if(n<=0){
+            return rev;
+        }
+        int digit=n%10;
+        rev=rev*10+digit;
+        return reverseOfNumbers(n/10,rev);
+    }
+
     //call the function and reduce the number till 1 and multiply the number from 1-n;
 
     static int factorial(int n){
@@ -77,7 +89,7 @@ public class recurssion {
     //call the function and add the number till n and multiply the number from n-1;
 
     static int backtrackFactorial(int i,int n){
-        if(i==n){
+        if(i>=n){
             return n;
         }
         return i*backtrackFactorial(i+1, n);
@@ -170,7 +182,7 @@ public class recurssion {
         return l+r;
     }
 
-    //
+    //calls the function and then divide the index into half and then calls again and again until the index is 1 then calls the merge function to sort the elements then return the array;
 
     static int[] mergesort(int[] arr,int low,int high){
         if(low>=high){
