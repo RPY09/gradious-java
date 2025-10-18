@@ -18,7 +18,8 @@ public class recurssion {
         // }
         String str="pranav";
         // System.out.println(isPalindrome(str,0,str.length()));
-        System.out.println(countChar(str,'p'));
+        // System.out.println(countChar(str,'p'));
+        System.out.println(removeOccurence(str,'a',""));
         // System.out.println(fibanocci(9));
         // subSequenceArray(0,brr,arr);
         // targetInArray(0,arr,brr,0,9);
@@ -126,7 +127,7 @@ public class recurssion {
         return isPalindrome(s, i+1, n);
     }
 
-    //
+    //counts the letter and reduce the string with one character from start to form a new string until string length beacomes 0;
 
     static int countChar(String str,Character target){
         if(str.length()==0){
@@ -134,6 +135,17 @@ public class recurssion {
         }
         int count=str.charAt(0)==target?1:0;
         return count+countChar(str.substring(1), target);
+    }
+
+    //
+
+    static String removeOccurence(String str,char target,String result){
+        if(str.length()==0){
+            return result;
+        }
+        char ch=str.charAt(0);
+        if(ch!=target){result+=ch;}
+        return removeOccurence(str.substring(1), target, result);
     }
 
     //
