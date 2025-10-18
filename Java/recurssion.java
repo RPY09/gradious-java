@@ -8,7 +8,7 @@ public class recurssion {
         // backTrackNumbers(1,9);
         // System.out.println(sumOfNaturalNum(5));
         // System.out.println(backtrackSumOfNatural(0,9));
-        System.out.println(reverseOfNumbers(123,0));
+        // System.out.println(reverseOfNumbers(123,0));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,5));
         int [] arr={1,3,5,3,4,2,9};
@@ -16,8 +16,9 @@ public class recurssion {
         // for(int num:res){
         //     System.out.println(num+" ");
         // }
-        String str="121";
+        String str="pranav";
         // System.out.println(isPalindrome(str,0,str.length()));
+        System.out.println(countChar(str,'p'));
         // System.out.println(fibanocci(9));
         // subSequenceArray(0,brr,arr);
         // targetInArray(0,arr,brr,0,9);
@@ -123,6 +124,16 @@ public class recurssion {
             return false;
         }
         return isPalindrome(s, i+1, n);
+    }
+
+    //
+
+    static int countChar(String str,Character target){
+        if(str.length()==0){
+            return 0;
+        }
+        int count=str.charAt(0)==target?1:0;
+        return count+countChar(str.substring(1), target);
     }
 
     //
