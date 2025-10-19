@@ -11,24 +11,27 @@ public class recurssion {
         // System.out.println(reverseOfNumbers(123,0));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,5));
-        int [] arr={1,3,5,3,4,2,9};
+        int [] arr={2,3,6,7};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
         // }
-        String str="pranav";
+        String str="abc";
         // System.out.println(isPalindrome(str,0,str.length()));
         // System.out.println(countChar(str,'p'));
         // System.out.println(removeOccurence(str,'a',""));
-        System.out.println(replaceChar(str,'a','A',""));
+        // System.out.println(replaceChar(str,'a','A',""));
+        // subSequence(str,0,"");
+        // subString(str,0,str.length()-1);
         // System.out.println(fibanocci(9));
         // subSequenceArray(0,brr,arr);
-        // targetInArray(0,arr,brr,0,9);
+        // targetInArray(0,arr,brr,0,7);
         // System.out.println(subArrayOddSum(0,0,arr,brr));
         // int[] res = mergesort(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
         // };
+        denomination(arr,0,7,brr);
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -149,7 +152,7 @@ public class recurssion {
         return removeOccurence(str.substring(1), target, result);
     }
 
-    //
+    //when the character matched it replace the character with new character and returns the new result;
 
     static String replaceChar(String str,char target,char change,String result){
         if(str.length()==0){
@@ -158,6 +161,41 @@ public class recurssion {
         char ch=str.charAt(0)==target?change:str.charAt(0);
         result+=ch;
         return replaceChar(str.substring(1), target, change, result);
+    }
+
+    //return the subsequnce of the string and to know the how many are there use 2**n formula and n is the length of the string
+
+    static void subSequence(String str,int i,String result){
+      
+        if(i==str.length()){
+            System.out.println(result);
+            return;
+        }
+        
+        subSequence(str, i+1, result+str.charAt(i));
+       
+        subSequence(str, i+1, result);
+    }
+
+    //
+
+    static void subString(String str,int start, int end) {
+    // base case
+    if (start == str.length()) {
+        return;
+    }
+
+    // when end reaches beyond string, move to next start
+    if (end > str.length()) {
+        subString(str, start + 1, start + 1);
+        return;
+    }
+
+    // print current substring
+    System.out.println(str.substring(start, end));
+
+    // move end forward
+    subString(str, start, end + 1);
     }
 
     //
@@ -176,13 +214,13 @@ public class recurssion {
             System.out.println(brr);
             return;
         }
-        brr.add(arr[i]);
-        subSequenceArray(i+1,brr,arr);
-        brr.remove(brr.size()-1);
-        subSequenceArray(i+1,brr,arr);
+        brr.add(arr[i]);//add the value to the array
+        subSequenceArray(i+1,brr,arr);//take the value 
+        brr.remove(brr.size()-1);//remove the last element in the array after return
+        subSequenceArray(i+1,brr,arr);//not take the value, means last value will not print;
     }
 
-    //this is same like subsequence recurrsion just here we are adding the sum and target element and comparing them to check the sum target reach if yes then print the subarray 
+    //this is same like subsequence recurrsion just here we are adding the sum and target element and comparing them to check the sum target reach if yes then print the subarray ;
 
     static void targetInArray(int i,int[] arr,List<Integer> brr,int sum,int target){
         if(i>=arr.length){
@@ -253,5 +291,22 @@ public class recurssion {
             arr[i]=temp.get(i-low);
         }
         return arr;
+    }
+
+    //
+
+    static void denomination(int[] arr,int i,int target,List<Integer>brr){
+        if(i>=arr.length){
+            if(target==0){
+                System.out.println(brr);
+            }return;
+        }
+        if(arr[i]<=target){
+          brr.add(arr[i]);
+            // target-=arr[i];
+            denomination(arr, i, target-arr[i], brr);
+            brr.remove(brr.size()-1);
+        }
+        denomination(arr, i+1, target, brr);
     }
 }
