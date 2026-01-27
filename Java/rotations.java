@@ -27,7 +27,7 @@ public class rotations {
         for (int i = 0; i < originalMatrix.length; i++) {
             clockwiseMatrix[i] = Arrays.copyOf(originalMatrix[i], originalMatrix[i].length);
         }
-        clockwise90(clockwiseMatrix);
+        clockwise90(clockwiseMatrix);//call this functions for 2 times it rotate 180deg for 3 times rotates 270deg
         System.out.println("\nAfter 90 Clockwise rotation:");
         printMatrix(clockwiseMatrix);
 
@@ -35,28 +35,28 @@ public class rotations {
         for (int i = 0; i < originalMatrix.length; i++) {
             antiClockwiseMatrix[i] = Arrays.copyOf(originalMatrix[i], originalMatrix[i].length);
         }
-        antiClockwise90(antiClockwiseMatrix);
+        antiClockwise90(antiClockwiseMatrix);//call this functions for 2 times it rotate 180deg for 3 times rotates 270deg
         System.out.println("\nAfter 90 Anti-Clockwise rotation:");
         printMatrix(antiClockwiseMatrix);
     }
 
-    public static void rightRotate(int[] arr, int k) {
+    public static void rightRotate(int[] arr, int k) {// right rotate or Clock wise
         int n = arr.length;
-        k = k % n;
-        reverse(arr, 0, n - 1);
-        reverse(arr, 0, k - 1);
-        reverse(arr, k, n - 1);
+        k = k % n;//Key Rule and important for rotations 
+        reverse(arr, 0, n - 1);//Reverse the whole Array
+        reverse(arr, 0, k - 1);//Reverse the first k elements
+        reverse(arr, k, n - 1);//Reverse the remaining elemnts from k to n-1
     }
 
-    public static void leftRotate(int[] arr, int k) {
+    public static void leftRotate(int[] arr, int k) {// left rotate or Anti-Clock wise is same just from above right rotate palce the last function call to be first call  that's it
         int n = arr.length;
         k = k % n;
-        reverse(arr, 0, k - 1);
-        reverse(arr, k, n - 1);
-        reverse(arr, 0, n - 1);
+        reverse(arr, 0, k - 1);//Reverse the first k elements
+        reverse(arr, k, n - 1);//Reverse the remaining elemnts from k to n-1
+        reverse(arr, 0, n - 1);//Reverse the whole Array
     }
 
-    public static void reverse(int[] arr, int start, int end) {
+    public static void reverse(int[] arr, int start, int end) {//revers means swap the elements
         while (start < end) {
             int temp = arr[start];
             arr[start] = arr[end];
@@ -66,37 +66,37 @@ public class rotations {
         }
     }
 
-    public static void clockwise90(int[][] matrix) {
+    public static void clockwise90(int[][] matrix) {//for Clockwise after transpose swap or reverse the Rows element
         int n = matrix.length;
         transpose(matrix);
-        for (int i = 0; i < n; i++) {
-            int left = 0, right = matrix[i].length - 1;
-            while (left < right) {
-                int temp = matrix[i][left];
-                matrix[i][left] = matrix[i][right];
-                matrix[i][right] = temp;
+        for (int rows = 0; rows < n; rows++) {
+            int left = 0, right = matrix[rows].length - 1;//points the rows left and right indexs 
+            while (left < right) {//swaps the elements until the condition is false 
+                int temp = matrix[rows][left];
+                matrix[rows][left] = matrix[rows][right];
+                matrix[rows][right] = temp;
                 left++;
                 right--;
             }
         }
     }
 
-    public static void antiClockwise90(int[][] matrix) {
+    public static void antiClockwise90(int[][] matrix) {//for Anti-Clockwise after transpose swap or reverse the Columns element
         int n = matrix.length;
         transpose(matrix);
-        for (int i = 0; i < n; i++) {
+        for (int cols = 0; cols < n; cols++) {//points the cols top and bottom positions 
             int top = 0, bottom = matrix.length - 1;
-            while (top < bottom) {
-                int temp = matrix[top][i];
-                matrix[top][i] = matrix[bottom][i];
-                matrix[bottom][i] = temp;
+            while (top < bottom) {//swaps the elements until condition is false
+                int temp = matrix[top][cols];
+                matrix[top][cols] = matrix[bottom][cols];
+                matrix[bottom][cols] = temp;
                 top++;
                 bottom--;
             }
         }
     }
 
-    public static void transpose(int[][] matrix) {
+    public static void transpose(int[][] matrix) {//this makes that rows to columns and colums to rows
         for (int i = 0; i < matrix.length; i++) {
             for (int j = i; j < matrix[0].length; j++) {
                 int temp = matrix[i][j];
