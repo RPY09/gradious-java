@@ -2,11 +2,11 @@ import java.util.HashMap;
 
 public class hash {
     public static void main(String[] args) {
-        // stringfreq();
+        stringfreq();
         // twoSum();
         // twoSumHash();
         // romanInteger();
-        longestUniqueSubString();
+        // longestUniqueSubString();
     }
     static void stringfreq(){
         String words="rpranavyadav";

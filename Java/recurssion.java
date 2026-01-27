@@ -11,7 +11,7 @@ public class recurssion {
         // System.out.println(reverseOfNumbers(123,0));
         // System.out.println(factorial(9));
         // System.out.println(backtrackFactorial(1,5));
-        int [] arr={2,3,6,7};
+        int [] arr={1,2,3};
         // int res[]=reverseArray(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
@@ -25,13 +25,13 @@ public class recurssion {
         // subString(str,0,str.length()-1);
         // System.out.println(fibanocci(9));
         // subSequenceArray(0,brr,arr);
-        // targetInArray(0,arr,brr,0,7);
+        targetInArray(0,arr,brr,0,3);
         // System.out.println(subArrayOddSum(0,0,arr,brr));
         // int[] res = mergesort(arr,0,arr.length-1);
         // for(int num:res){
         //     System.out.println(num+" ");
         // };
-        denomination(arr,0,7,brr);
+        // denomination(arr,0,7,brr);
     }
 
     //call the function and decrese the i to traverse upto the condition and return then start printing the numbers in backtrack and the input is given as a largest number upto we want to print;
@@ -236,11 +236,62 @@ public class recurssion {
         targetInArray(i+1, arr, brr, sum, target);
     }
 
-    //this returns the count of odd sum in the array and the substring of the array while checking the sum is odd or not 
+    // Finds all contiguous subarrays (elements next to each other) that sum up to the target.
+    static void targetInSubArray(int[] arr, int target) {
+        // 1. Pick a starting point for the subarray.
+        for (int i = 0; i < arr.length; i++) {
+            int currentSum = 0;
+            // 2. Explore all possible subarrays starting from index 'i'.
+            for (int j = i; j < arr.length; j++) {
+                // 3. Add the next element to the current subarray's sum.
+                currentSum += arr[j];
+                
+                // 4. If the sum matches the target, we found a valid subarray.
+                if (currentSum == target) {
+                    // Create a list and print the found subarray (from i to j).
+                    List<Integer> subarray = new ArrayList<>();
+                    for (int k = i; k <= j; k++) {
+                        subarray.add(arr[k]);
+                    }
+                    System.out.println(subarray);
+                }
+            }
+        }
+    }
 
+    // An optimized O(n) method using the "Sliding Window" technique.
+    // NOTE: This method only works for arrays containing NON-NEGATIVE numbers.
+    static void targetInSubArraySlidingWindow(int[] arr, int target) {
+        int start = 0;
+        long currentSum = 0; // Use long to avoid potential overflow if numbers are large
+        
+        // 'end' pointer expands the window by moving to the right
+        for (int end = 0; end < arr.length; end++) {
+            // Add the current element to the window's sum
+            currentSum += arr[end];
+            
+            // While sum is greater than target, shrink the window from the left
+            while (currentSum > target && start <= end) {
+                currentSum -= arr[start];
+                start++;
+            }
+            
+            // If the window's sum equals the target, we've found a subarray
+            if (currentSum == target) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = start; k <= end; k++) {
+                    subarray.add(arr[k]);
+                }
+                System.out.println(subarray);
+            }
+        }
+    }
+
+    //this returns the count of odd sum in the array and the substring of the array while checking the sum is odd or not 
     static int subArrayOddSum(int i,int sum,int[] arr,List<Integer> brr){
         if(i>=arr.length){
             if(sum%2!=0){
+                
                 System.out.println(brr);
                 return 1;
             }
@@ -293,7 +344,7 @@ public class recurssion {
         return arr;
     }
 
-    //
+    //here the function call with the same index until the target is mismatched if the target becomes zero then it prints and get the all the demination of it. if the target is mismatched then then the index will be incresed by one and removes the last value form the list;
 
     static void denomination(int[] arr,int i,int target,List<Integer>brr){
         if(i>=arr.length){
@@ -303,7 +354,7 @@ public class recurssion {
         }
         if(arr[i]<=target){
           brr.add(arr[i]);
-            // target-=arr[i];
+            // target-=arr[i];`
             denomination(arr, i, target-arr[i], brr);
             brr.remove(brr.size()-1);
         }

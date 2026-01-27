@@ -1,0 +1,245 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.header-icons i {
+  margin-left: 15px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+h1 {
+  text-align: left;
+  color: #007bff;
+}
+
+/* Controls (Add Button) */
+.controls {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.addButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.addButton:hover {
+  background-color: #0056b3;
+}
+
+/* Table Styling (View / Read) */
+.table-container {
+  overflow-x: auto;
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.feedback-table th,
+.feedback-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.feedback-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+
+.feedback-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Action Buttons (Edit / Delete) */
+.actions-cell button {
+  border: none;
+  padding: 8px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+/* Edit Button Styling (Class: editButton) */
+.editButton {
+  background-color: #00bcd4;
+}
+
+.editButton:hover {
+  background-color: #0097a7;
+}
+
+/* Delete Button Styling (CORRECTED Class: deleteButton) */
+.deleteButton {
+  background-color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+/* Editable Input Fields */
+.editable-input {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Modal Styling (Add User Form & Delete Confirmation) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 50px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal-content h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-top: 0;
+}
+
+/* Add User Form Styling (Class: addUserForm) */
+.addUserForm .form-group {
+  margin-bottom: 15px;
+}
+
+.addUserForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.addUserForm input[type="text"],
+.addUserForm input[type="number"],
+.addUserForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* Save and Close Buttons (Classes: saveButton, closeButton) */
+.saveButton {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px;
+}
+
+.saveButton:hover {
+  background-color: #1e7e34;
+}
+
+.closeButton {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.closeButton:hover {
+  background-color: #5a6268;
+}
+
+/* Delete Confirmation Styling (Class: confirm-box, IDs: delete, cancel) */
+.confirm-box #delete {
+  background-color: #ffc107;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.confirm-box #cancel {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px;
+}
+
+.confirm-box p {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.confirm-box .modal-actions {
+  text-align: center;
+}
