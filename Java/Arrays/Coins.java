@@ -1,3 +1,4 @@
+package Arrays;
 public class Coins {
     public static void main(String[] args) {
          int coins[] = { 2, 5, 7 };

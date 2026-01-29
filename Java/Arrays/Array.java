@@ -1,3 +1,4 @@
+package Arrays;
 import java.util.Scanner;
 public class Array {
     static Scanner sc=new Scanner(System.in);
